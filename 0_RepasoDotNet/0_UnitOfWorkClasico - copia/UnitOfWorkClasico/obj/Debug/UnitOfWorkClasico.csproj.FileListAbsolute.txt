@@ -1,5 +1,0 @@
-C:\Users\Crist_000\Documents\GitHub\Angular-MVC4\0_RepasoDotNet\0_UnitOfWorkClasico\UnitOfWorkClasico\bin\Debug\UnitOfWorkClasico.dll
-C:\Users\Crist_000\Documents\GitHub\Angular-MVC4\0_RepasoDotNet\0_UnitOfWorkClasico\UnitOfWorkClasico\bin\Debug\UnitOfWorkClasico.pdb
-C:\Users\Crist_000\Documents\GitHub\Angular-MVC4\0_RepasoDotNet\0_UnitOfWorkClasico\UnitOfWorkClasico\obj\Debug\UnitOfWorkClasico.csprojResolveAssemblyReference.cache
-C:\Users\Crist_000\Documents\GitHub\Angular-MVC4\0_RepasoDotNet\0_UnitOfWorkClasico\UnitOfWorkClasico\obj\Debug\UnitOfWorkClasico.dll
-C:\Users\Crist_000\Documents\GitHub\Angular-MVC4\0_RepasoDotNet\0_UnitOfWorkClasico\UnitOfWorkClasico\obj\Debug\UnitOfWorkClasico.pdb
