@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace Biblioteca.Repository.EF.AlmacenamientoDataContext
+namespace Biblioteca.Repository.EF.ContenedoresDataContext
 {
     /*  Esta clase almacena colecciones de objetos de entidades de negocio 
         en un objeto HttpContext para que sean obtenidas por un cliente en un entorno web, 
@@ -25,7 +25,7 @@ namespace Biblioteca.Repository.EF.AlmacenamientoDataContext
                 bibliotecaDataContext = (BibliotecaDataContext)HttpContext.Current.Items[_dataContextKey];
             }
 
-            return bibliotecaDataContext;           
+            return bibliotecaDataContext;
         }
 
         public void Almacenar(BibliotecaDataContext bibliotecaDataContext)

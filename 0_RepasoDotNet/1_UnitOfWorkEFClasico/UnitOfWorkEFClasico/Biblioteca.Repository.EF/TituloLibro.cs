@@ -7,23 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Biblioteca.Model
+namespace Biblioteca.Repository.EF
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Miembro
+    public partial class TituloLibro
     {
-        public Miembro()
-        {
-            this.Prestamos = new HashSet<Prestamo>();
-        }
-    
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
+        public string ISBN { get; set; }
+        public string Titulo { get; set; }
+        public Nullable<int> IdLibro { get; set; }
     
         public virtual Libro Libro { get; set; }
-        public virtual ICollection<Prestamo> Prestamos { get; set; }
     }
 }

@@ -7,17 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Biblioteca.Model
+namespace Biblioteca.Repository.EF
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class TituloLibro
+    public partial class Prestamo
     {
-        public string ISBN { get; set; }
-        public string Titulo { get; set; }
+        public string Id { get; set; }
+        public Nullable<System.DateTime> FechaPrestamo { get; set; }
+        public Nullable<System.DateTime> FechaDevolucion { get; set; }
+        public Nullable<System.DateTime> FechaEstipuladaDevolucion { get; set; }
         public Nullable<int> IdLibro { get; set; }
+        public Nullable<int> IdMiembro { get; set; }
     
         public virtual Libro Libro { get; set; }
+        public virtual Miembro Miembro { get; set; }
     }
 }

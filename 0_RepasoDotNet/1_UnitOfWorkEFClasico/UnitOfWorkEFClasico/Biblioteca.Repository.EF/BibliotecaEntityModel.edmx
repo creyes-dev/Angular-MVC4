@@ -126,26 +126,26 @@
     <edmx:ConceptualModels>
       <Schema Namespace="BibliotecaModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="BibliotecaEntities" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="Libroes" EntityType="BibliotecaModel.Libro" />
-          <EntitySet Name="Miembroes" EntityType="BibliotecaModel.Miembro" />
-          <EntitySet Name="Prestamoes" EntityType="BibliotecaModel.Prestamo" />
-          <EntitySet Name="sysdiagrams" EntityType="BibliotecaModel.sysdiagram" />
-          <EntitySet Name="TituloLibroes" EntityType="BibliotecaModel.TituloLibro" />
+          <EntitySet Name="Libro" EntityType="BibliotecaModel.Libro" />
+          <EntitySet Name="Miembro" EntityType="BibliotecaModel.Miembro" />
+          <EntitySet Name="Prestamo" EntityType="BibliotecaModel.Prestamo" />
+          <EntitySet Name="sysdiagrams" EntityType="BibliotecaModel.sysdiagrams" />
+          <EntitySet Name="TituloLibro" EntityType="BibliotecaModel.TituloLibro" />
           <AssociationSet Name="FK_Libro_Miembro" Association="BibliotecaModel.FK_Libro_Miembro">
-            <End Role="Miembro" EntitySet="Miembroes" />
-            <End Role="Libro" EntitySet="Libroes" />
+            <End Role="Miembro" EntitySet="Miembro" />
+            <End Role="Libro" EntitySet="Libro" />
           </AssociationSet>
           <AssociationSet Name="FK_Prestamo_Libro" Association="BibliotecaModel.FK_Prestamo_Libro">
-            <End Role="Libro" EntitySet="Libroes" />
-            <End Role="Prestamo" EntitySet="Prestamoes" />
+            <End Role="Libro" EntitySet="Libro" />
+            <End Role="Prestamo" EntitySet="Prestamo" />
           </AssociationSet>
           <AssociationSet Name="FK_TituloLibro_Libro" Association="BibliotecaModel.FK_TituloLibro_Libro">
-            <End Role="Libro" EntitySet="Libroes" />
-            <End Role="TituloLibro" EntitySet="TituloLibroes" />
+            <End Role="Libro" EntitySet="Libro" />
+            <End Role="TituloLibro" EntitySet="TituloLibro" />
           </AssociationSet>
           <AssociationSet Name="FK_Prestamo_Miembro" Association="BibliotecaModel.FK_Prestamo_Miembro">
-            <End Role="Miembro" EntitySet="Miembroes" />
-            <End Role="Prestamo" EntitySet="Prestamoes" />
+            <End Role="Miembro" EntitySet="Miembro" />
+            <End Role="Prestamo" EntitySet="Prestamo" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Libro">
@@ -155,7 +155,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="IdMiembroPrestamoActual" Type="Int32" />
           <NavigationProperty Name="Miembro" Relationship="BibliotecaModel.FK_Libro_Miembro" FromRole="Libro" ToRole="Miembro" />
-          <NavigationProperty Name="Prestamos" Relationship="BibliotecaModel.FK_Prestamo_Libro" FromRole="Libro" ToRole="Prestamo" />
+          <NavigationProperty Name="Prestamo" Relationship="BibliotecaModel.FK_Prestamo_Libro" FromRole="Libro" ToRole="Prestamo" />
           <NavigationProperty Name="TitulosLibro" Relationship="BibliotecaModel.FK_TituloLibro_Libro" FromRole="Libro" ToRole="TituloLibro" />
         </EntityType>
         <EntityType Name="Miembro">
@@ -181,7 +181,7 @@
           <NavigationProperty Name="Libro" Relationship="BibliotecaModel.FK_Prestamo_Libro" FromRole="Prestamo" ToRole="Libro" />
           <NavigationProperty Name="Miembro" Relationship="BibliotecaModel.FK_Prestamo_Miembro" FromRole="Prestamo" ToRole="Miembro" />
         </EntityType>
-        <EntityType Name="sysdiagram">
+        <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
@@ -254,7 +254,7 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BibliotecaModelStoreContainer" CdmEntityContainer="BibliotecaEntities">
-          <EntitySetMapping Name="Libroes">
+          <EntitySetMapping Name="Libro">
             <EntityTypeMapping TypeName="BibliotecaModel.Libro">
               <MappingFragment StoreEntitySet="Libro">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -262,7 +262,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Miembroes">
+          <EntitySetMapping Name="Miembro">
             <EntityTypeMapping TypeName="BibliotecaModel.Miembro">
               <MappingFragment StoreEntitySet="Miembro">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -271,7 +271,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Prestamoes">
+          <EntitySetMapping Name="Prestamo">
             <EntityTypeMapping TypeName="BibliotecaModel.Prestamo">
               <MappingFragment StoreEntitySet="Prestamo">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -284,7 +284,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="BibliotecaModel.sysdiagram">
+            <EntityTypeMapping TypeName="BibliotecaModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -294,7 +294,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TituloLibroes">
+          <EntitySetMapping Name="TituloLibro">
             <EntityTypeMapping TypeName="BibliotecaModel.TituloLibro">
               <MappingFragment StoreEntitySet="TituloLibro">
                 <ScalarProperty Name="ISBN" ColumnName="ISBN" />

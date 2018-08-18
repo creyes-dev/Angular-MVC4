@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Biblioteca.Repository.EF.AlmacenamientoDataContext
+namespace Biblioteca.Repository.EF.ContenedoresDataContext
 {
 
     /*  Esta clase crea un objeto de una clase específica que implementa la interfaz IContenedorDataContext

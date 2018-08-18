@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Biblioteca.Repository.EF")]
+[assembly: AssemblyTitle("Biblioteca.Model")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Toshiba")]
-[assembly: AssemblyProduct("Biblioteca.Repository.EF")]
+[assembly: AssemblyProduct("Biblioteca.Model")]
 [assembly: AssemblyCopyright("Copyright © Toshiba 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("4c874428-75e8-4c39-807d-076e7d477340")]
+[assembly: Guid("a8363d74-12f1-4fac-b338-396076cafc31")]
 
 // Version information for an assembly consists of the following four values:
 //

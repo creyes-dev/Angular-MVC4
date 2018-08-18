@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Biblioteca.Model
+namespace Biblioteca.Repository.EF
 {
     using System;
     using System.Collections.Generic;
@@ -16,7 +16,7 @@ namespace Biblioteca.Model
     {
         public Libro()
         {
-            this.Prestamos = new HashSet<Prestamo>();
+            this.Prestamo = new HashSet<Prestamo>();
             this.TitulosLibro = new HashSet<TituloLibro>();
         }
     
@@ -24,7 +24,7 @@ namespace Biblioteca.Model
         public Nullable<int> IdMiembroPrestamoActual { get; set; }
     
         public virtual Miembro Miembro { get; set; }
-        public virtual ICollection<Prestamo> Prestamos { get; set; }
+        public virtual ICollection<Prestamo> Prestamo { get; set; }
         public virtual ICollection<TituloLibro> TitulosLibro { get; set; }
     }
 }

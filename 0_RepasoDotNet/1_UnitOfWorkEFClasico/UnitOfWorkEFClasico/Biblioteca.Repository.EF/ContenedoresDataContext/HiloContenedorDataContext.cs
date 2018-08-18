@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Biblioteca.Repository.EF.AlmacenamientoDataContext
+namespace Biblioteca.Repository.EF.ContenedoresDataContext
 {
     public class HiloContenedorDataContext : IContenedorDataContext
     {
@@ -15,16 +15,16 @@ namespace Biblioteca.Repository.EF.AlmacenamientoDataContext
         public BibliotecaDataContext ObtenerDataContext()
         {
             BibliotecaDataContext bibliotecaDataContext = null;
-            if(_bibliotecaDataContext.Contains(ObtenerNombreHilo()))
+            if (_bibliotecaDataContext.Contains(ObtenerNombreHilo()))
             {
-                bibliotecaDataContext = (BibliotecaDataContext) _bibliotecaDataContext[ObtenerNombreHilo()];
+                bibliotecaDataContext = (BibliotecaDataContext)_bibliotecaDataContext[ObtenerNombreHilo()];
             }
-            return bibliotecaDataContext; 
+            return bibliotecaDataContext;
         }
 
         public void Almacenar(BibliotecaDataContext bibliotecaDataContext)
         {
-            if(_bibliotecaDataContext.Contains(ObtenerNombreHilo()))
+            if (_bibliotecaDataContext.Contains(ObtenerNombreHilo()))
             {
                 _bibliotecaDataContext[ObtenerNombreHilo()] = bibliotecaDataContext;
             }
@@ -37,6 +37,6 @@ namespace Biblioteca.Repository.EF.AlmacenamientoDataContext
         private static string ObtenerNombreHilo()
         {
             return Thread.CurrentThread.Name;
-        }  
+        }
     }
 }

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{252B3777-6A37-455B-B3F9-C7259071A9B2}</ProjectGuid>
+    <ProjectGuid>{6127CDAC-F307-4FE7-892C-EB70E4CFDF50}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Biblioteca.Repository.EF</RootNamespace>
@@ -30,9 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,16 +47,72 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlmacenamientoDataContext\ContenedorDataContextFactory.cs" />
-    <Compile Include="AlmacenamientoDataContext\HiloContenedorDataContext.cs" />
-    <Compile Include="AlmacenamientoDataContext\HttpContenedorDataContext.cs" />
-    <Compile Include="AlmacenamientoDataContext\IContenedorDataContext.cs" />
     <Compile Include="BibliotecaDataContext.cs" />
+    <Compile Include="ContenedoresDataContext\ContenedorDataContextFactory.cs" />
+    <Compile Include="ContenedoresDataContext\HiloContenedorDataContext.cs" />
+    <Compile Include="ContenedoresDataContext\HttpContenedorDataContext.cs" />
+    <Compile Include="ContenedoresDataContext\IContenedorDataContext.cs" />
+    <Compile Include="BibliotecaEntityModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BibliotecaEntityModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BibliotecaEntityModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BibliotecaEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BibliotecaEntityModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BibliotecaEntityModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Libro.cs">
+      <DependentUpon>BibliotecaEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Miembro.cs">
+      <DependentUpon>BibliotecaEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Prestamo.cs">
+      <DependentUpon>BibliotecaEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>BibliotecaEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TituloLibro.cs">
+      <DependentUpon>BibliotecaEntityModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Repository.EF\Biblioteca.Model.csproj">
-      <Project>{3d3f61e0-d6ea-411e-93a7-d901989f1a2b}</Project>
+    <EntityDeploy Include="BibliotecaEntityModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BibliotecaEntityModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="BibliotecaEntityModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BibliotecaEntityModel.edmx</DependentUpon>
+      <LastGenOutput>BibliotecaEntityModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="BibliotecaEntityModel.edmx.diagram">
+      <DependentUpon>BibliotecaEntityModel.edmx</DependentUpon>
+    </None>
+    <None Include="BibliotecaEntityModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BibliotecaEntityModel.edmx</DependentUpon>
+      <LastGenOutput>BibliotecaEntityModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Biblioteca.Model\Biblioteca.Model.csproj">
+      <Project>{edcd5467-85da-452f-94b6-aef47430d1ca}</Project>
       <Name>Biblioteca.Model</Name>
     </ProjectReference>
   </ItemGroup>

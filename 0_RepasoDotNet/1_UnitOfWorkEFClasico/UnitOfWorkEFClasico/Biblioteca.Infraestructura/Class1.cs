@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnitOfWorkEFClasico
+namespace Biblioteca.Infraestructura
 {
     public class Class1
     {

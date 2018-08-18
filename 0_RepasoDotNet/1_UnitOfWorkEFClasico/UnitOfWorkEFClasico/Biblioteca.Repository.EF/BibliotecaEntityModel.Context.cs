@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Biblioteca.Model
+namespace Biblioteca.Repository.EF
 {
     using System;
     using System.Data.Entity;
@@ -25,10 +25,10 @@ namespace Biblioteca.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Libro> Libroes { get; set; }
-        public DbSet<Miembro> Miembroes { get; set; }
-        public DbSet<Prestamo> Prestamoes { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
-        public DbSet<TituloLibro> TituloLibroes { get; set; }
+        public DbSet<Libro> Libro { get; set; }
+        public DbSet<Miembro> Miembro { get; set; }
+        public DbSet<Prestamo> Prestamo { get; set; }
+        public DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public DbSet<TituloLibro> TituloLibro { get; set; }
     }
 }
