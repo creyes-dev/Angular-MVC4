@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitOfWorkEFClasico", "UnitOfWorkEFClasico\UnitOfWorkEFClasico.csproj", "{37EECB98-B6C5-47CA-906E-3760457AC7FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.EF", "Repository.EF\Repository.EF.csproj", "{3D3F61E0-D6EA-411E-93A7-D901989F1A2B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.Model", "Repository.EF\Biblioteca.Model.csproj", "{3D3F61E0-D6EA-411E-93A7-D901989F1A2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.Repository.EF", "Biblioteca.Repository.EF\Biblioteca.Repository.EF.csproj", "{252B3777-6A37-455B-B3F9-C7259071A9B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +21,10 @@ Global
 		{3D3F61E0-D6EA-411E-93A7-D901989F1A2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D3F61E0-D6EA-411E-93A7-D901989F1A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D3F61E0-D6EA-411E-93A7-D901989F1A2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{252B3777-6A37-455B-B3F9-C7259071A9B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{252B3777-6A37-455B-B3F9-C7259071A9B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{252B3777-6A37-455B-B3F9-C7259071A9B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{252B3777-6A37-455B-B3F9-C7259071A9B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,8 +7,8 @@
     <ProjectGuid>{3D3F61E0-D6EA-411E-93A7-D901989F1A2B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Repository.EF</RootNamespace>
-    <AssemblyName>Repository.EF</AssemblyName>
+    <RootNamespace>Biblioteca.Model</RootNamespace>
+    <AssemblyName>Biblioteca.Model</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

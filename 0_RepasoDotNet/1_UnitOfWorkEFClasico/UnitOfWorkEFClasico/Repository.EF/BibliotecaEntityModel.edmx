@@ -155,8 +155,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="IdMiembroPrestamoActual" Type="Int32" />
           <NavigationProperty Name="Miembro" Relationship="BibliotecaModel.FK_Libro_Miembro" FromRole="Libro" ToRole="Miembro" />
-          <NavigationProperty Name="Prestamoes" Relationship="BibliotecaModel.FK_Prestamo_Libro" FromRole="Libro" ToRole="Prestamo" />
-          <NavigationProperty Name="TituloLibroes" Relationship="BibliotecaModel.FK_TituloLibro_Libro" FromRole="Libro" ToRole="TituloLibro" />
+          <NavigationProperty Name="Prestamos" Relationship="BibliotecaModel.FK_Prestamo_Libro" FromRole="Libro" ToRole="Prestamo" />
+          <NavigationProperty Name="TitulosLibro" Relationship="BibliotecaModel.FK_TituloLibro_Libro" FromRole="Libro" ToRole="TituloLibro" />
         </EntityType>
         <EntityType Name="Miembro">
           <Key>
@@ -166,7 +166,7 @@
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Apellido" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Libro" Relationship="BibliotecaModel.FK_Libro_Miembro" FromRole="Miembro" ToRole="Libro" />
-          <NavigationProperty Name="Prestamoes" Relationship="BibliotecaModel.FK_Prestamo_Miembro" FromRole="Miembro" ToRole="Prestamo" />
+          <NavigationProperty Name="Prestamos" Relationship="BibliotecaModel.FK_Prestamo_Miembro" FromRole="Miembro" ToRole="Prestamo" />
         </EntityType>
         <EntityType Name="Prestamo">
           <Key>

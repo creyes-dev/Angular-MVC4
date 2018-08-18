@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Repository.EF
+namespace Biblioteca.Model
 {
     using System;
     using System.Collections.Generic;
