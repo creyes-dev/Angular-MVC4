@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Biblioteca.Infraestructura
+namespace Biblioteca.Model.Repository
 {
-    public class Class1
+    public interface ITituloLibroRepository
     {
     }
 }
