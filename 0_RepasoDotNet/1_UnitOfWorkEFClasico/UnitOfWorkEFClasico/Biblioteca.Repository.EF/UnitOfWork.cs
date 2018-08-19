@@ -19,17 +19,17 @@ namespace Biblioteca.Repository.EF
             DataContextFactory.ObtenerBibliotecaDataContext().SaveChanges();
         }
 
-        public void RegisterAmended(IAggregateRoot entity, IUnitOfWorkRepository unitofWorkRepository)
+        public void RegistrarModificado(IAggregateRoot entity, IUnitOfWorkRepository unitofWorkRepository)
         {
             unitofWorkRepository.PersistirModificacion(entity);
         }
 
-        public void RegisterNew(IAggregateRoot entity, IUnitOfWorkRepository unitofWorkRepository)
+        public void RegistrarNuevo(IAggregateRoot entity, IUnitOfWorkRepository unitofWorkRepository)
         {
             unitofWorkRepository.PersistirCreacion(entity);
         }
 
-        public void RegisterRemoved(IAggregateRoot entity, IUnitOfWorkRepository unitofWorkRepository)
+        public void RegistrarRemovido(IAggregateRoot entity, IUnitOfWorkRepository unitofWorkRepository)
         {
             unitofWorkRepository.PersistirEliminacion(entity);
         }
