@@ -67,6 +67,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BibliotecaEntityModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DataContextFactory.cs" />
     <Compile Include="Libro.cs">
       <DependentUpon>BibliotecaEntityModel.tt</DependentUpon>
     </Compile>
@@ -83,6 +84,7 @@
     <Compile Include="TituloLibro.cs">
       <DependentUpon>BibliotecaEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="BibliotecaEntityModel.edmx">
@@ -111,6 +113,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Biblioteca.Infraestructura\Biblioteca.Infraestructura.csproj">
+      <Project>{7195a2db-5da7-4599-a002-756afca932bf}</Project>
+      <Name>Biblioteca.Infraestructura</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Biblioteca.Model\Biblioteca.Model.csproj">
       <Project>{edcd5467-85da-452f-94b6-aef47430d1ca}</Project>
       <Name>Biblioteca.Model</Name>
