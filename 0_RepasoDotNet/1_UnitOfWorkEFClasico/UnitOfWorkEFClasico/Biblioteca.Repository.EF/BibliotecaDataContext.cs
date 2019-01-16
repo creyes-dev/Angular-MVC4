@@ -21,7 +21,7 @@ namespace Biblioteca.Repository.EF
         private ObjectSet<TituloLibro> _titulosLibros;
 
         public BibliotecaDataContext()
-            : base("name=BibliotecaModelStoreContainer", "BibliotecaModelStoreContainer")
+            : base("name=BibliotecaEntities", "BibliotecaEntities")
         {
             _miembros = CreateObjectSet<Miembro>();
             _libros = CreateObjectSet<Libro>();
