@@ -11,6 +11,6 @@ namespace Biblioteca.Model
     {
         public string ISBN { get; set; }
 
-        public string Title { get; set; }     
+        public string Titulo { get; set; }     
     }
 }

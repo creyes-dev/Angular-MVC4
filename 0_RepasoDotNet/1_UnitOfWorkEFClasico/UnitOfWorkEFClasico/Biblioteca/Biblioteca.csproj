@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{37EECB98-B6C5-47CA-906E-3760457AC7FE}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{73C92036-1F72-4BF6-A5D6-6A4ED2E4A450}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnitOfWorkEFClasico</RootNamespace>
-    <AssemblyName>UnitOfWorkEFClasico</AssemblyName>
+    <RootNamespace>Biblioteca</RootNamespace>
+    <AssemblyName>Biblioteca</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -39,11 +41,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="main.cs" />
+    <Compile Include="BibliotecaService.cs" />
+    <Compile Include="BibliotecaServiceFactory.cs" />
+    <Compile Include="PrestamoService.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Servicios\" />
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Biblioteca.Infraestructura\Biblioteca.Infraestructura.csproj">
+      <Project>{7195a2db-5da7-4599-a002-756afca932bf}</Project>
+      <Name>Biblioteca.Infraestructura</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Biblioteca.Model\Biblioteca.Model.csproj">
+      <Project>{edcd5467-85da-452f-94b6-aef47430d1ca}</Project>
+      <Name>Biblioteca.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Biblioteca.Repository.EF\Biblioteca.Repository.EF.csproj">
+      <Project>{6127cdac-f307-4fe7-892c-eb70e4cfdf50}</Project>
+      <Name>Biblioteca.Repository.EF</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
