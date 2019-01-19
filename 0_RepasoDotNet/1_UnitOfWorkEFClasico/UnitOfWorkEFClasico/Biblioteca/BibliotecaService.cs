@@ -9,6 +9,8 @@ using Biblioteca.Infraestructura.UnitOfOWork;
 
 namespace Biblioteca
 {
+    // Ofrece una interfaz a los clientes y agrupa todas las operaciones que puede hacer un cliente en el modulo de libreria
+    // Si se implementara el patron request-response esta clase haria los mapeos de las clases de negocio a las vistas
     public class BibliotecaService
     {
         private IUnitOfWork _uow;

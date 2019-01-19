@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Biblioteca.Model
 {
+    // La clase prestamo no posee reglas de negocio y validaciones para que el codigo sea mas simple
     public class Prestamo
     {
         public Guid Id { get; set; }
@@ -16,7 +17,8 @@ namespace Biblioteca.Model
         public DateTime FechaEstipuladaDevolucion { get; set; }
         public Guid IdLibro { get; set; }
         public Guid IdMiembro { get; set; }
-
+        
+        // Prpopiedad Libro es virtual para habilitar LazyLoading
         public virtual Libro Libro { get; set; }
         public virtual Miembro Miembro { get; set; }
         
