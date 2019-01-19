@@ -31,15 +31,15 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="IdMiembroPrestamo" Type="int" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdMiembroPrestamo" Type="uniqueidentifier" />
           <Property Name="IdTitulo" Type="varchar" Nullable="false" MaxLength="20" />
         </EntityType>
         <EntityType Name="Miembro">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Apellido" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
@@ -47,12 +47,12 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="FechaPrestamo" Type="date" Nullable="false" />
           <Property Name="FechaDevolucion" Type="date" Nullable="false" />
           <Property Name="FechaEstipuladaDevolucion" Type="date" Nullable="false" />
-          <Property Name="IdLibro" Type="int" Nullable="false" />
-          <Property Name="IdMiembro" Type="int" Nullable="false" />
+          <Property Name="IdLibro" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdMiembro" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="TituloLibro">
           <Key>
@@ -62,7 +62,7 @@
           <Property Name="Titulo" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Libro_Miembro">
-          <End Role="Miembro" Type="BibliotecaModel.Store.Miembro" Multiplicity="1" />
+          <End Role="Miembro" Type="BibliotecaModel.Store.Miembro" Multiplicity="0..1" />
           <End Role="Libro" Type="BibliotecaModel.Store.Libro" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Miembro">
@@ -114,25 +114,25 @@
     <edmx:ConceptualModels>
       <Schema Namespace="BibliotecaModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="BibliotecaEntities" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="Libro" EntityType="BibliotecaModel.Libro" />
-          <EntitySet Name="Miembro" EntityType="BibliotecaModel.Miembro" />
-          <EntitySet Name="Prestamo" EntityType="BibliotecaModel.Prestamo" />
-          <EntitySet Name="TituloLibro" EntityType="BibliotecaModel.TituloLibro" />
+          <EntitySet Name="Libros" EntityType="BibliotecaModel.Libro" />
+          <EntitySet Name="Miembros" EntityType="BibliotecaModel.Miembro" />
+          <EntitySet Name="Prestamos" EntityType="BibliotecaModel.Prestamo" />
+          <EntitySet Name="TitulosLibros" EntityType="BibliotecaModel.TituloLibro" />
           <AssociationSet Name="FK_Libro_Miembro" Association="BibliotecaModel.FK_Libro_Miembro">
-            <End Role="Miembro" EntitySet="Miembro" />
-            <End Role="Libro" EntitySet="Libro" />
+            <End Role="Miembro" EntitySet="Miembros" />
+            <End Role="Libro" EntitySet="Libros" />
           </AssociationSet>
           <AssociationSet Name="FK_Libro_TituloLibro" Association="BibliotecaModel.FK_Libro_TituloLibro">
-            <End Role="TituloLibro" EntitySet="TituloLibro" />
-            <End Role="Libro" EntitySet="Libro" />
+            <End Role="TituloLibro" EntitySet="TitulosLibros" />
+            <End Role="Libro" EntitySet="Libros" />
           </AssociationSet>
           <AssociationSet Name="FK_Prestamo_Libro" Association="BibliotecaModel.FK_Prestamo_Libro">
-            <End Role="Libro" EntitySet="Libro" />
-            <End Role="Prestamo" EntitySet="Prestamo" />
+            <End Role="Libro" EntitySet="Libros" />
+            <End Role="Prestamo" EntitySet="Prestamos" />
           </AssociationSet>
           <AssociationSet Name="FK_Prestamo_Miembro" Association="BibliotecaModel.FK_Prestamo_Miembro">
-            <End Role="Miembro" EntitySet="Miembro" />
-            <End Role="Prestamo" EntitySet="Prestamo" />
+            <End Role="Miembro" EntitySet="Miembros" />
+            <End Role="Prestamo" EntitySet="Prestamos" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Libro">
@@ -140,7 +140,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Guid" Name="Id" Nullable="false" />
-          <Property Type="Guid" Name="IdMiembroPrestamo" Nullable="false" />
+          <Property Type="Guid" Name="IdMiembroPrestamo" />
           <Property Type="String" Name="IdTitulo" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Miembro" Relationship="BibliotecaModel.FK_Libro_Miembro" FromRole="Libro" ToRole="Miembro" />
           <NavigationProperty Name="TituloLibro" Relationship="BibliotecaModel.FK_Libro_TituloLibro" FromRole="Libro" ToRole="TituloLibro" />
@@ -178,7 +178,7 @@
           <NavigationProperty Name="Libro" Relationship="BibliotecaModel.FK_Libro_TituloLibro" FromRole="TituloLibro" ToRole="Libro" />
         </EntityType>
         <Association Name="FK_Libro_Miembro">
-          <End Type="BibliotecaModel.Miembro" Role="Miembro" Multiplicity="1" />
+          <End Type="BibliotecaModel.Miembro" Role="Miembro" Multiplicity="0..1" />
           <End Type="BibliotecaModel.Libro" Role="Libro" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Miembro">
@@ -231,7 +231,7 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BibliotecaModelStoreContainer" CdmEntityContainer="BibliotecaEntities">
-          <EntitySetMapping Name="Libro">
+          <EntitySetMapping Name="Libros">
             <EntityTypeMapping TypeName="BibliotecaModel.Libro">
               <MappingFragment StoreEntitySet="Libro">
                 <ScalarProperty Name="IdTitulo" ColumnName="IdTitulo" />
@@ -240,7 +240,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Miembro">
+          <EntitySetMapping Name="Miembros">
             <EntityTypeMapping TypeName="BibliotecaModel.Miembro">
               <MappingFragment StoreEntitySet="Miembro">
                 <ScalarProperty Name="Apellido" ColumnName="Apellido" />
@@ -249,7 +249,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Prestamo">
+          <EntitySetMapping Name="Prestamos">
             <EntityTypeMapping TypeName="BibliotecaModel.Prestamo">
               <MappingFragment StoreEntitySet="Prestamo">
                 <ScalarProperty Name="IdMiembro" ColumnName="IdMiembro" />
@@ -261,7 +261,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TituloLibro">
+          <EntitySetMapping Name="TitulosLibros">
             <EntityTypeMapping TypeName="BibliotecaModel.TituloLibro">
               <MappingFragment StoreEntitySet="TituloLibro">
                 <ScalarProperty Name="Titulo" ColumnName="Titulo" />

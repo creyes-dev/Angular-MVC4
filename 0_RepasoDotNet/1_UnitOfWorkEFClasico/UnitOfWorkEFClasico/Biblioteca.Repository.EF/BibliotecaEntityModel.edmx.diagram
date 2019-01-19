@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e7ffa267ae524b8e85533e8525648dfd" Name="Diagram1">
-        <EntityTypeShape EntityType="BibliotecaModel.Libro" Width="1.5" PointX="10.875" PointY="19.5" />
-        <EntityTypeShape EntityType="BibliotecaModel.Miembro" Width="1.5" PointX="10.75" PointY="23.25" />
-        <EntityTypeShape EntityType="BibliotecaModel.Prestamo" Width="1.5" PointX="8" PointY="20.875" />
-        <EntityTypeShape EntityType="BibliotecaModel.TituloLibro" Width="1.5" PointX="4" PointY="21.125" />
+      <Diagram DiagramId="e7ffa267ae524b8e85533e8525648dfd" Name="Diagram1" ZoomLevel="93">
+        <EntityTypeShape EntityType="BibliotecaModel.Libro" Width="1.5" PointX="9.75" PointY="1.75" />
+        <EntityTypeShape EntityType="BibliotecaModel.Miembro" Width="1.5" PointX="15.25" PointY="5.375" />
+        <EntityTypeShape EntityType="BibliotecaModel.Prestamo" Width="1.5" PointX="11.875" PointY="5.125" />
+        <EntityTypeShape EntityType="BibliotecaModel.TituloLibro" Width="1.5" PointX="9.5" PointY="8" />
         <AssociationConnector Association="BibliotecaModel.FK_Libro_Miembro" />
         <AssociationConnector Association="BibliotecaModel.FK_Libro_TituloLibro" />
         <AssociationConnector Association="BibliotecaModel.FK_Prestamo_Libro" />

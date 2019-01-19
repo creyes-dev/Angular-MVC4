@@ -22,7 +22,7 @@ namespace Biblioteca
             BibliotecaService bibliotecaService = BibliotecaServiceFactory.Crear();
 
             // Crear un nuevo libro
-            bibliotecaService.AgregarTituloLibro("978-0321832054", "Ruby on Rails Tutorial: Learn Web Development with Rails (2nd Edition)");
+            bibliotecaService.AgregarTituloLibro("978-0321832054", "RoR Tutorial");
 
             // Cargar un nuevo ejemplar
             bibliotecaService.AgregarLibro("978-0321832054");

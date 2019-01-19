@@ -94,7 +94,9 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="BibliotecaEntityModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BibliotecaEntityModel.edmx</DependentUpon>
@@ -102,6 +104,7 @@
     </None>
     <None Include="BibliotecaEntityModel.edmx.diagram">
       <DependentUpon>BibliotecaEntityModel.edmx</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="BibliotecaEntityModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

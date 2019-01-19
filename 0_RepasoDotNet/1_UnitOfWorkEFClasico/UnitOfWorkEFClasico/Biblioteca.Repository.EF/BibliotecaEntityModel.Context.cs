@@ -25,9 +25,9 @@ namespace Biblioteca.Repository.EF
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Libro> Libro { get; set; }
-        public DbSet<Miembro> Miembro { get; set; }
-        public DbSet<Prestamo> Prestamo { get; set; }
-        public DbSet<TituloLibro> TituloLibro { get; set; }
+        public DbSet<Libro> Libros { get; set; }
+        public DbSet<Miembro> Miembros { get; set; }
+        public DbSet<Prestamo> Prestamos { get; set; }
+        public DbSet<TituloLibro> TitulosLibros { get; set; }
     }
 }

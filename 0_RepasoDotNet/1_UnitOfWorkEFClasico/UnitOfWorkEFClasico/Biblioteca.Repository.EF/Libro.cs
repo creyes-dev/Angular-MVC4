@@ -20,7 +20,7 @@ namespace Biblioteca.Repository.EF
         }
     
         public System.Guid Id { get; set; }
-        public System.Guid IdMiembroPrestamo { get; set; }
+        public Nullable<System.Guid> IdMiembroPrestamo { get; set; }
         public string IdTitulo { get; set; }
     
         public virtual Miembro Miembro { get; set; }
