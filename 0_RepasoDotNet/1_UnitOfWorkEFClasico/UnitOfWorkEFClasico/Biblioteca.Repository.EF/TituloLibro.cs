@@ -14,10 +14,14 @@ namespace Biblioteca.Repository.EF
     
     public partial class TituloLibro
     {
+        public TituloLibro()
+        {
+            this.Libro = new HashSet<Libro>();
+        }
+    
         public string ISBN { get; set; }
         public string Titulo { get; set; }
-        public Nullable<int> IdLibro { get; set; }
     
-        public virtual Libro Libro { get; set; }
+        public virtual ICollection<Libro> Libro { get; set; }
     }
 }

@@ -10,7 +10,8 @@ namespace Biblioteca.Model
     public class TituloLibro : IAggregateRoot
     {
         public string ISBN { get; set; }
+        public string Titulo { get; set; }
 
-        public string Titulo { get; set; }     
+        public virtual ICollection<Libro> Libro { get; set; }
     }
 }

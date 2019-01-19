@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Biblioteca.Model;
 
 namespace Biblioteca.Repository.EF
 {
@@ -16,30 +17,30 @@ namespace Biblioteca.Repository.EF
 
     public class BibliotecaDataContext : ObjectContext
     {
-        private ObjectSet<Miembro> _miembros;
-        private ObjectSet<Libro> _libros;
-        private ObjectSet<TituloLibro> _titulosLibros;
+        private ObjectSet<Model.Miembro> _miembros;
+        private ObjectSet<Model.Libro> _libros;
+        private ObjectSet<Model.TituloLibro> _titulosLibros;
 
         public BibliotecaDataContext()
             : base("name=BibliotecaEntities", "BibliotecaEntities")
         {
-            _miembros = CreateObjectSet<Miembro>();
-            _libros = CreateObjectSet<Libro>();
-            _titulosLibros = CreateObjectSet<TituloLibro>();
+            _miembros = CreateObjectSet<Model.Miembro>();
+            _libros = CreateObjectSet<Model.Libro>();
+            _titulosLibros = CreateObjectSet<Model.TituloLibro>();
             base.ContextOptions.LazyLoadingEnabled = true;
         }
 
-        public ObjectSet<Miembro> Miembros
+        public ObjectSet<Model.Miembro> Miembros
         {
             get { return _miembros; }
         }
 
-        public ObjectSet<Libro> Libros
+        public ObjectSet<Model.Libro> Libros
         {
             get { return _libros; }
         }
 
-        public ObjectSet<TituloLibro> TitulosLibros
+        public ObjectSet<Model.TituloLibro> TitulosLibros
         {
             get { return _titulosLibros; }
         }

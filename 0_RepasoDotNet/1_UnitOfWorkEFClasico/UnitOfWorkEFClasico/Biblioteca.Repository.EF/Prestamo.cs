@@ -14,12 +14,12 @@ namespace Biblioteca.Repository.EF
     
     public partial class Prestamo
     {
-        public string Id { get; set; }
-        public Nullable<System.DateTime> FechaPrestamo { get; set; }
-        public Nullable<System.DateTime> FechaDevolucion { get; set; }
-        public Nullable<System.DateTime> FechaEstipuladaDevolucion { get; set; }
-        public Nullable<int> IdLibro { get; set; }
-        public Nullable<int> IdMiembro { get; set; }
+        public System.Guid Id { get; set; }
+        public System.DateTime FechaPrestamo { get; set; }
+        public System.DateTime FechaDevolucion { get; set; }
+        public System.DateTime FechaEstipuladaDevolucion { get; set; }
+        public System.Guid IdLibro { get; set; }
+        public System.Guid IdMiembro { get; set; }
     
         public virtual Libro Libro { get; set; }
         public virtual Miembro Miembro { get; set; }

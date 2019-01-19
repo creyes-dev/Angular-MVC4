@@ -45,7 +45,7 @@ namespace Biblioteca
         {
             TituloLibro tituloLibro = _tituloLibroRepository.FindBy(isbn);
             Libro libro = new Libro();
-            libro.Titulo = tituloLibro;
+            libro.TituloLibro = tituloLibro;
             libro.Id = Guid.NewGuid();
             _libroRepository.Add(libro);
             _uow.Commit();

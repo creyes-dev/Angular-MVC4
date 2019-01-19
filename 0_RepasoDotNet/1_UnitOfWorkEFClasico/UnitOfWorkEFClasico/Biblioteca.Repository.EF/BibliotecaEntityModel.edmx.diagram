@@ -5,15 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="e7ffa267ae524b8e85533e8525648dfd" Name="Diagram1">
-        <EntityTypeShape EntityType="BibliotecaModel.Libro" Width="1.5" PointX="2.875" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BibliotecaModel.Miembro" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BibliotecaModel.Prestamo" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BibliotecaModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BibliotecaModel.TituloLibro" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
-        <AssociationConnector Association="BibliotecaModel.FK_Libro_Miembro" ManuallyRouted="false" />
-        <AssociationConnector Association="BibliotecaModel.FK_Prestamo_Libro" ManuallyRouted="false" />
-        <AssociationConnector Association="BibliotecaModel.FK_TituloLibro_Libro" ManuallyRouted="false" />
-        <AssociationConnector Association="BibliotecaModel.FK_Prestamo_Miembro" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BibliotecaModel.Libro" Width="1.5" PointX="10.875" PointY="19.5" />
+        <EntityTypeShape EntityType="BibliotecaModel.Miembro" Width="1.5" PointX="10.75" PointY="23.25" />
+        <EntityTypeShape EntityType="BibliotecaModel.Prestamo" Width="1.5" PointX="8" PointY="20.875" />
+        <EntityTypeShape EntityType="BibliotecaModel.TituloLibro" Width="1.5" PointX="4" PointY="21.125" />
+        <AssociationConnector Association="BibliotecaModel.FK_Libro_Miembro" />
+        <AssociationConnector Association="BibliotecaModel.FK_Libro_TituloLibro" />
+        <AssociationConnector Association="BibliotecaModel.FK_Prestamo_Libro" />
+        <AssociationConnector Association="BibliotecaModel.FK_Prestamo_Miembro" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

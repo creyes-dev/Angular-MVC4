@@ -17,14 +17,14 @@ namespace Biblioteca.Repository.EF
         public Libro()
         {
             this.Prestamo = new HashSet<Prestamo>();
-            this.TitulosLibro = new HashSet<TituloLibro>();
         }
     
-        public int Id { get; set; }
-        public Nullable<int> IdMiembroPrestamoActual { get; set; }
+        public System.Guid Id { get; set; }
+        public System.Guid IdMiembroPrestamo { get; set; }
+        public string IdTitulo { get; set; }
     
         public virtual Miembro Miembro { get; set; }
+        public virtual TituloLibro TituloLibro { get; set; }
         public virtual ICollection<Prestamo> Prestamo { get; set; }
-        public virtual ICollection<TituloLibro> TitulosLibro { get; set; }
     }
 }

@@ -28,7 +28,6 @@ namespace Biblioteca.Repository.EF
         public DbSet<Libro> Libro { get; set; }
         public DbSet<Miembro> Miembro { get; set; }
         public DbSet<Prestamo> Prestamo { get; set; }
-        public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<TituloLibro> TituloLibro { get; set; }
     }
 }
