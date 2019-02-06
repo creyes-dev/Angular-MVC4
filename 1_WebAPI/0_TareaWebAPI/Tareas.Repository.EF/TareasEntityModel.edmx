@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TareasModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="TareasModelStoreContainer">
+          <EntitySet Name="Categoria" EntityType="TareasModel.Store.Categoria" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Estado" EntityType="TareasModel.Store.Estado" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Prioridad" EntityType="TareasModel.Store.Prioridad" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tarea" EntityType="TareasModel.Store.Tarea" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TareaCategoria" EntityType="TareasModel.Store.TareaCategoria" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TareaUsuario" EntityType="TareasModel.Store.TareaUsuario" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Usuario" EntityType="TareasModel.Store.Usuario" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Tarea_Estado" Association="TareasModel.Store.FK_Tarea_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Tarea" EntitySet="Tarea" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tarea_Prioridad" Association="TareasModel.Store.FK_Tarea_Prioridad">
+            <End Role="Prioridad" EntitySet="Prioridad" />
+            <End Role="Tarea" EntitySet="Tarea" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TareaCategoria_Categoria" Association="TareasModel.Store.FK_TareaCategoria_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="TareaCategoria" EntitySet="TareaCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TareaCategoria_Tarea" Association="TareasModel.Store.FK_TareaCategoria_Tarea">
+            <End Role="Tarea" EntitySet="Tarea" />
+            <End Role="TareaCategoria" EntitySet="TareaCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TareaUsuario_Tarea" Association="TareasModel.Store.FK_TareaUsuario_Tarea">
+            <End Role="Tarea" EntitySet="Tarea" />
+            <End Role="TareaUsuario" EntitySet="TareaUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TareaUsuario_Usuario" Association="TareasModel.Store.FK_TareaUsuario_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="TareaUsuario" EntitySet="TareaUsuario" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Ordinal" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Prioridad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" Nullable="false" />
+          <Property Name="Nombre" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="Ordinal" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tarea">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Asunto" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="FechaDesde" Type="smalldatetime" Nullable="false" />
+          <Property Name="FechaVencimiento" Type="smalldatetime" Nullable="false" />
+          <Property Name="FechaCompletada" Type="smalldatetime" />
+          <Property Name="IdEstado" Type="tinyint" Nullable="false" />
+          <Property Name="IdPrioridad" Type="tinyint" Nullable="false" />
+          <Property Name="FechaCreacion" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TareaCategoria">
+          <Key>
+            <PropertyRef Name="IdTarea" />
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdTarea" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdCategoria" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TareaUsuario">
+          <Key>
+            <PropertyRef Name="IdTarea" />
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdTarea" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Apellido" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Tarea_Estado">
+          <End Role="Estado" Type="TareasModel.Store.Estado" Multiplicity="1" />
+          <End Role="Tarea" Type="TareasModel.Store.Tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tarea">
+              <PropertyRef Name="IdEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tarea_Prioridad">
+          <End Role="Prioridad" Type="TareasModel.Store.Prioridad" Multiplicity="1" />
+          <End Role="Tarea" Type="TareasModel.Store.Tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prioridad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tarea">
+              <PropertyRef Name="IdPrioridad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TareaCategoria_Categoria">
+          <End Role="Categoria" Type="TareasModel.Store.Categoria" Multiplicity="1" />
+          <End Role="TareaCategoria" Type="TareasModel.Store.TareaCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TareaCategoria">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TareaCategoria_Tarea">
+          <End Role="Tarea" Type="TareasModel.Store.Tarea" Multiplicity="1" />
+          <End Role="TareaCategoria" Type="TareasModel.Store.TareaCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tarea">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TareaCategoria">
+              <PropertyRef Name="IdTarea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TareaUsuario_Tarea">
+          <End Role="Tarea" Type="TareasModel.Store.Tarea" Multiplicity="1" />
+          <End Role="TareaUsuario" Type="TareasModel.Store.TareaUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tarea">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TareaUsuario">
+              <PropertyRef Name="IdTarea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TareaUsuario_Usuario">
+          <End Role="Usuario" Type="TareasModel.Store.Usuario" Multiplicity="1" />
+          <End Role="TareaUsuario" Type="TareasModel.Store.TareaUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TareaUsuario">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TareasModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TareasEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Categorias" EntityType="TareasModel.Categoria" />
+          <EntitySet Name="Estados" EntityType="TareasModel.Estado" />
+          <EntitySet Name="Prioridades" EntityType="TareasModel.Prioridad" />
+          <EntitySet Name="Tareas" EntityType="TareasModel.Tarea" />
+          <EntitySet Name="Usuarios" EntityType="TareasModel.Usuario" />
+          <AssociationSet Name="FK_Tarea_Estado" Association="TareasModel.FK_Tarea_Estado">
+            <End Role="Estado" EntitySet="Estados" />
+            <End Role="Tarea" EntitySet="Tareas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tarea_Prioridad" Association="TareasModel.FK_Tarea_Prioridad">
+            <End Role="Prioridad" EntitySet="Prioridades" />
+            <End Role="Tarea" EntitySet="Tareas" />
+          </AssociationSet>
+          <AssociationSet Name="TareaCategoria" Association="TareasModel.TareaCategoria">
+            <End Role="Categoria" EntitySet="Categorias" />
+            <End Role="Tarea" EntitySet="Tareas" />
+          </AssociationSet>
+          <AssociationSet Name="TareaUsuario" Association="TareasModel.TareaUsuario">
+            <End Role="Tarea" EntitySet="Tareas" />
+            <End Role="Usuario" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Byte" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tareas" Relationship="TareasModel.TareaCategoria" FromRole="Categoria" ToRole="Tarea" />
+        </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Byte" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int16" Name="Ordinal" Nullable="false" />
+          <NavigationProperty Name="Tareas" Relationship="TareasModel.FK_Tarea_Estado" FromRole="Estado" ToRole="Tarea" />
+        </EntityType>
+        <EntityType Name="Prioridad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Byte" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="Int16" Name="Ordinal" Nullable="false" />
+          <NavigationProperty Name="Tareas" Relationship="TareasModel.FK_Tarea_Prioridad" FromRole="Prioridad" ToRole="Tarea" />
+        </EntityType>
+        <EntityType Name="Tarea">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Asunto" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="FechaDesde" Nullable="false" Precision="0" />
+          <Property Type="DateTime" Name="FechaVencimiento" Nullable="false" Precision="0" />
+          <Property Type="DateTime" Name="FechaCompletada" Precision="0" />
+          <Property Type="Byte" Name="IdEstado" Nullable="false" />
+          <Property Type="Byte" Name="IdPrioridad" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Estado" Relationship="TareasModel.FK_Tarea_Estado" FromRole="Tarea" ToRole="Estado" />
+          <NavigationProperty Name="Prioridad" Relationship="TareasModel.FK_Tarea_Prioridad" FromRole="Tarea" ToRole="Prioridad" />
+          <NavigationProperty Name="Categoria" Relationship="TareasModel.TareaCategoria" FromRole="Tarea" ToRole="Categoria" />
+          <NavigationProperty Name="Usuario" Relationship="TareasModel.TareaUsuario" FromRole="Tarea" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Apellido" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tareas" Relationship="TareasModel.TareaUsuario" FromRole="Usuario" ToRole="Tarea" />
+        </EntityType>
+        <Association Name="FK_Tarea_Estado">
+          <End Type="TareasModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="TareasModel.Tarea" Role="Tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tarea">
+              <PropertyRef Name="IdEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tarea_Prioridad">
+          <End Type="TareasModel.Prioridad" Role="Prioridad" Multiplicity="1" />
+          <End Type="TareasModel.Tarea" Role="Tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prioridad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tarea">
+              <PropertyRef Name="IdPrioridad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TareaCategoria">
+          <End Type="TareasModel.Categoria" Role="Categoria" Multiplicity="*" />
+          <End Type="TareasModel.Tarea" Role="Tarea" Multiplicity="*" />
+        </Association>
+        <Association Name="TareaUsuario">
+          <End Type="TareasModel.Tarea" Role="Tarea" Multiplicity="*" />
+          <End Type="TareasModel.Usuario" Role="Usuario" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TareasModelStoreContainer" CdmEntityContainer="TareasEntities">
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="TareasModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estados">
+            <EntityTypeMapping TypeName="TareasModel.Estado">
+              <MappingFragment StoreEntitySet="Estado">
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prioridades">
+            <EntityTypeMapping TypeName="TareasModel.Prioridad">
+              <MappingFragment StoreEntitySet="Prioridad">
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tareas">
+            <EntityTypeMapping TypeName="TareasModel.Tarea">
+              <MappingFragment StoreEntitySet="Tarea">
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdPrioridad" ColumnName="IdPrioridad" />
+                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+                <ScalarProperty Name="FechaCompletada" ColumnName="FechaCompletada" />
+                <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
+                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="TareasModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="TareaCategoria" TypeName="TareasModel.TareaCategoria" StoreEntitySet="TareaCategoria">
+            <EndProperty Name="Tarea">
+              <ScalarProperty Name="Id" ColumnName="IdTarea" />
+            </EndProperty>
+            <EndProperty Name="Categoria">
+              <ScalarProperty Name="Id" ColumnName="IdCategoria" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="TareaUsuario" TypeName="TareasModel.TareaUsuario" StoreEntitySet="TareaUsuario">
+            <EndProperty Name="Usuario">
+              <ScalarProperty Name="Id" ColumnName="IdUsuario" />
+            </EndProperty>
+            <EndProperty Name="Tarea">
+              <ScalarProperty Name="Id" ColumnName="IdTarea" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

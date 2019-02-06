@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -164,6 +165,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tareas.Infraestructura\Tareas.Infraestructura.csproj">
+      <Project>{7de56c32-14be-4a32-92d5-63271a6d1ec2}</Project>
+      <Name>Tareas.Infraestructura</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tareas.Model\Tareas.Model.csproj">
+      <Project>{311d5120-1169-40aa-a2ae-b7a0ca37638a}</Project>
+      <Name>Tareas.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tareas.Servicio\Tareas.Servicio.csproj">
+      <Project>{e8171ec9-080b-4147-b7b5-f11b757e1aef}</Project>
+      <Name>Tareas.Servicio</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
