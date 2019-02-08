@@ -13,7 +13,6 @@ namespace Tareas.Model
         public string Apellido { get; set; }
         public string Nombre { get; set; }
 
-        // public virtual ICollection<Tarea> Tareas { get; set; }
-        public ICollection<Tarea> Tareas { get; set; }
+        public virtual ICollection<Tarea> Tareas { get; set; }
     }
 }
