@@ -11,15 +11,53 @@ namespace Tareas.Servicio
 {
     public class TareasService
     {
+        private IEstadoRepository _estadoRepository;
+        private ICategoriaRepository _categoriaRepository;
+        private IPrioridadRepository _prioridadRepository;
         private IUsuarioRepository _usuarioRepository;
         private IUnitOfWork _unitOfWork;
 
-        public TareasService(IUsuarioRepository usuarioRepository,
+        public TareasService(IEstadoRepository estadoRepository,
+                             ICategoriaRepository categoriaRepository,
+                             IPrioridadRepository prioridadRepository,
+                             IUsuarioRepository usuarioRepository,
                              IUnitOfWork unitOfWork)
         {
+            _estadoRepository = estadoRepository;
+            _categoriaRepository = categoriaRepository;
+            _prioridadRepository = prioridadRepository;
             _usuarioRepository = usuarioRepository;
             _unitOfWork = unitOfWork;
         }
+        
+        // Estados
+
+        public IEnumerable<Estado> ObtenerEstados()
+        {
+            IEnumerable<Estado> estados;
+            estados = _estadoRepository.FindAll();
+            return estados;
+        }
+
+        // Categorias
+
+        public IEnumerable<Categoria> ObtenerCategorias()
+        {
+            IEnumerable<Categoria> categorias;
+            categorias = _categoriaRepository.FindAll();
+            return categorias;
+        }
+
+        // Prioridades
+
+        public IEnumerable<Prioridad> ObtenerPrioridades()
+        {
+            IEnumerable<Prioridad> prioridades;
+            prioridades = _prioridadRepository.FindAll();
+            return prioridades;
+        }
+
+        // Usuarios
 
         // Crear un nuevo usuario
         public void RegistrarUsuario(string apellido, string nombre)

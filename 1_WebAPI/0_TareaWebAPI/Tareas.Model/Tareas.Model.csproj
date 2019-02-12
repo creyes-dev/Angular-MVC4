@@ -43,6 +43,9 @@
     <Compile Include="Estado.cs" />
     <Compile Include="Prioridad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ICategoriaRepository.cs" />
+    <Compile Include="Repository\IEstadoRepository.cs" />
+    <Compile Include="Repository\IPrioridadRepository.cs" />
     <Compile Include="Repository\IUsuarioRepository.cs" />
     <Compile Include="Tarea.cs" />
     <Compile Include="Usuario.cs" />

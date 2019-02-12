@@ -17,12 +17,18 @@ namespace Tareas.Servicio
         public static TareasService Crear()
         {
             IUnitOfWork uow;
+            IEstadoRepository estadoRepository;
+            ICategoriaRepository categoriaRepository;
+            IPrioridadRepository prioridadRepository;
             IUsuarioRepository usuarioRepository;
 
             uow = new UnitOfWork();
+            estadoRepository = new EstadoRepository(uow);
+            categoriaRepository = new CategoriaRepository(uow);
+            prioridadRepository = new PrioridadRepository(uow);
             usuarioRepository = new UsuarioRepository(uow);
 
-            return new TareasService(usuarioRepository, uow);
+            return new TareasService(estadoRepository, categoriaRepository, prioridadRepository, usuarioRepository, uow);
         }
     }
 }
