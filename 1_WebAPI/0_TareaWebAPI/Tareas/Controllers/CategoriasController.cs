@@ -33,5 +33,21 @@ namespace Tareas.Controllers
             return response;
         }
 
+        // PUT api/categorias/5
+        public HttpResponseMessage Put(int id, Model.Categoria categoria)
+        {
+            if (id != categoria.Id) return Request.CreateResponse(HttpStatusCode.BadRequest);
+
+            _tareasService.ModificarCategoria(categoria);
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        // DELETE api/categorias/5
+        public HttpResponseMessage Delete(int id)
+        {
+            _tareasService.EliminarCategoria(id);
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
     }
 }

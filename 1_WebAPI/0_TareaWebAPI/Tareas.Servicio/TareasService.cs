@@ -54,6 +54,25 @@ namespace Tareas.Servicio
             _unitOfWork.Commit();
         }
 
+        public void ModificarCategoria(Model.Categoria categoria)
+        {
+            Model.Categoria categoriaModificar = _categoriaRepository.FindBy(categoria.Id);
+            categoriaModificar.Nombre = categoria.Nombre;
+            categoriaModificar.Descripcion = categoria.Descripcion;
+
+            _categoriaRepository.Save(categoriaModificar);
+            _unitOfWork.Commit();
+        }
+
+        public void EliminarCategoria(int id)
+        {
+            byte idCategoria = (byte)id;
+
+            Model.Categoria categoria = _categoriaRepository.FindBy(idCategoria);
+            _categoriaRepository.Remove(categoria);
+            _unitOfWork.Commit();
+        }
+
         // Prioridades
 
         public IEnumerable<Prioridad> ObtenerPrioridades()

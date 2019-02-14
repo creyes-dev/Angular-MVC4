@@ -8,9 +8,9 @@ namespace Tareas.Model.Repository
 {
     public interface ICategoriaRepository
     {
-        void Add(Categoria usuario);
-        void Remove(Categoria usuario);
-        void Save(Categoria usuario);
+        void Add(Categoria categoria);
+        void Remove(Categoria categoria);
+        void Save(Categoria categoria);
 
         IEnumerable<Categoria> FindAll();
         Categoria FindBy(byte Id);
