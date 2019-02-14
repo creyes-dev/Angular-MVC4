@@ -16,8 +16,8 @@ namespace Tareas.Repository.EF
     {
         public Tarea()
         {
-            this.Categoria = new HashSet<Categoria>();
             this.Usuario = new HashSet<Usuario>();
+            this.Categoria = new HashSet<Categoria>();
         }
     
         public System.Guid Id { get; set; }
@@ -31,7 +31,7 @@ namespace Tareas.Repository.EF
     
         public virtual Estado Estado { get; set; }
         public virtual Prioridad Prioridad { get; set; }
-        public virtual ICollection<Categoria> Categoria { get; set; }
         public virtual ICollection<Usuario> Usuario { get; set; }
+        public virtual ICollection<Categoria> Categoria { get; set; }
     }
 }

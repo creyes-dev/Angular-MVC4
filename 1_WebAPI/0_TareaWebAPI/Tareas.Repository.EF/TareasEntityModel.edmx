@@ -42,7 +42,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="tinyint" Nullable="false" />
+          <Property Name="Id" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="nvarchar" Nullable="false" MaxLength="200" />
           <Property Name="Descripcion" Type="nvarchar" Nullable="false" MaxLength="200" />
         </EntityType>
@@ -176,7 +176,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="TareasModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="TareasEntities" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="Categorias" EntityType="TareasModel.Categoria" />
           <EntitySet Name="Estados" EntityType="TareasModel.Estado" />
           <EntitySet Name="Prioridades" EntityType="TareasModel.Prioridad" />
           <EntitySet Name="Tareas" EntityType="TareasModel.Tarea" />
@@ -189,24 +188,16 @@
             <End Role="Prioridad" EntitySet="Prioridades" />
             <End Role="Tarea" EntitySet="Tareas" />
           </AssociationSet>
-          <AssociationSet Name="TareaCategoria" Association="TareasModel.TareaCategoria">
-            <End Role="Categoria" EntitySet="Categorias" />
-            <End Role="Tarea" EntitySet="Tareas" />
-          </AssociationSet>
           <AssociationSet Name="TareaUsuario" Association="TareasModel.TareaUsuario">
             <End Role="Tarea" EntitySet="Tareas" />
             <End Role="Usuario" EntitySet="Usuarios" />
           </AssociationSet>
+          <EntitySet Name="Categorias" EntityType="TareasModel.Categoria" />
+          <AssociationSet Name="TareaCategoria" Association="TareasModel.TareaCategoria">
+            <End Role="Categoria" EntitySet="Categorias" />
+            <End Role="Tarea" EntitySet="Tareas" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Categoria">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Byte" Name="Id" Nullable="false" />
-          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Tareas" Relationship="TareasModel.TareaCategoria" FromRole="Categoria" ToRole="Tarea" />
-        </EntityType>
         <EntityType Name="Estado">
           <Key>
             <PropertyRef Name="Id" />
@@ -239,8 +230,8 @@
           <Property Type="DateTime" Name="FechaCreacion" Nullable="false" Precision="0" />
           <NavigationProperty Name="Estado" Relationship="TareasModel.FK_Tarea_Estado" FromRole="Tarea" ToRole="Estado" />
           <NavigationProperty Name="Prioridad" Relationship="TareasModel.FK_Tarea_Prioridad" FromRole="Tarea" ToRole="Prioridad" />
-          <NavigationProperty Name="Categoria" Relationship="TareasModel.TareaCategoria" FromRole="Tarea" ToRole="Categoria" />
           <NavigationProperty Name="Usuario" Relationship="TareasModel.TareaUsuario" FromRole="Tarea" ToRole="Usuario" />
+          <NavigationProperty Name="Categoria" Relationship="TareasModel.TareaCategoria" FromRole="Tarea" ToRole="Categoria" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -275,13 +266,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="TareaCategoria">
-          <End Type="TareasModel.Categoria" Role="Categoria" Multiplicity="*" />
-          <End Type="TareasModel.Tarea" Role="Tarea" Multiplicity="*" />
-        </Association>
         <Association Name="TareaUsuario">
           <End Type="TareasModel.Tarea" Role="Tarea" Multiplicity="*" />
           <End Type="TareasModel.Usuario" Role="Usuario" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Byte" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tareas" Relationship="TareasModel.TareaCategoria" FromRole="Categoria" ToRole="Tarea" />
+        </EntityType>
+        <Association Name="TareaCategoria">
+          <End Type="TareasModel.Categoria" Role="Categoria" Multiplicity="*" />
+          <End Type="TareasModel.Tarea" Role="Tarea" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -289,15 +289,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TareasModelStoreContainer" CdmEntityContainer="TareasEntities">
-          <EntitySetMapping Name="Categorias">
-            <EntityTypeMapping TypeName="TareasModel.Categoria">
-              <MappingFragment StoreEntitySet="Categoria">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Estados">
             <EntityTypeMapping TypeName="TareasModel.Estado">
               <MappingFragment StoreEntitySet="Estado">
@@ -339,20 +330,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="TareaCategoria" TypeName="TareasModel.TareaCategoria" StoreEntitySet="TareaCategoria">
-            <EndProperty Name="Tarea">
-              <ScalarProperty Name="Id" ColumnName="IdTarea" />
-            </EndProperty>
-            <EndProperty Name="Categoria">
-              <ScalarProperty Name="Id" ColumnName="IdCategoria" />
-            </EndProperty>
-          </AssociationSetMapping>
           <AssociationSetMapping Name="TareaUsuario" TypeName="TareasModel.TareaUsuario" StoreEntitySet="TareaUsuario">
             <EndProperty Name="Usuario">
               <ScalarProperty Name="Id" ColumnName="IdUsuario" />
             </EndProperty>
             <EndProperty Name="Tarea">
               <ScalarProperty Name="Id" ColumnName="IdTarea" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="TareasModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="TareaCategoria" TypeName="TareasModel.TareaCategoria" StoreEntitySet="TareaCategoria">
+            <EndProperty Name="Tarea">
+              <ScalarProperty Name="Id" ColumnName="IdTarea" />
+            </EndProperty>
+            <EndProperty Name="Categoria">
+              <ScalarProperty Name="Id" ColumnName="IdCategoria" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

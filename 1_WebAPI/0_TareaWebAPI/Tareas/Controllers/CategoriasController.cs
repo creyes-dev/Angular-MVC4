@@ -24,5 +24,14 @@ namespace Tareas.Controllers
         {
             return _tareasService.ObtenerCategorias();
         }
+
+        // POST api/categorias
+        public HttpResponseMessage Post(Model.Categoria categoria)
+        {
+            _tareasService.RegistrarCategoria(categoria);
+            var response = Request.CreateResponse(HttpStatusCode.Created, categoria);
+            return response;
+        }
+
     }
 }

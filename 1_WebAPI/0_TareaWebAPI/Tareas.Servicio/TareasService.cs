@@ -48,6 +48,12 @@ namespace Tareas.Servicio
             return categorias;
         }
 
+        public void RegistrarCategoria(Model.Categoria categoria)
+        {
+            _categoriaRepository.Add(categoria);
+            _unitOfWork.Commit();
+        }
+
         // Prioridades
 
         public IEnumerable<Prioridad> ObtenerPrioridades()

@@ -25,10 +25,10 @@ namespace Tareas.Repository.EF
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Estado> Estados { get; set; }
         public DbSet<Prioridad> Prioridades { get; set; }
         public DbSet<Tarea> Tareas { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
     }
 }

@@ -18,8 +18,6 @@ namespace Tareas.Repository.EF.Repositorios
             return GetObjectSet().FirstOrDefault<Model.Categoria>(c => c.Id == Id);
         }
 
-        
-
         public override IQueryable<Model.Categoria> GetObjectSet()
         {
             return DataContextFactory.ObtenerTareasDataContext().CreateObjectSet<Model.Categoria>();

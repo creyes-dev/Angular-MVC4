@@ -18,6 +18,7 @@ namespace Tareas.Repository.EF
             if (tareasDataContext == null)
             {
                 tareasDataContext = new TareasDataContext();
+                _contenedorDataContext.Almacenar(tareasDataContext);
             }
 
             return tareasDataContext;
