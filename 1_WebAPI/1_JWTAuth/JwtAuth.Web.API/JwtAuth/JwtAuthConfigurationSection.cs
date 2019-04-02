@@ -5,8 +5,7 @@ namespace JwtAuth.Web.API.JwtAuth
     public class JwtAuthConfigurationSection : ConfigurationSection
     {
         public static readonly JwtAuthConfigurationSection Current =
-            (JwtAuthConfigurationSection) ConfigurationManager.GetSection
-                ("JwtAuth");
+            (JwtAuthConfigurationSection) ConfigurationManager.GetSection("JwtAuthConfig");
 
         [ConfigurationProperty("EnableAuthenticationMessageHandler", DefaultValue = "false")]
         public bool EnableAuthenticationMessageHandler
