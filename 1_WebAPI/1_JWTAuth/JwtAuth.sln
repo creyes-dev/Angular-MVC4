@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4BCB0598
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{1F1FA133-9935-43AD-ABC2-B9ABAB276A8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtAuth.Tests.Controllers", "ValoresUnitTests\JwtAuth.Tests.Controllers.csproj", "{1347BBE7-8E6C-4F87-847C-93C2855C8F82}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtAuth.Tests.Controllers", "JwtAuth.Tests.Controllers\JwtAuth.Tests.Controllers.csproj", "{1347BBE7-8E6C-4F87-847C-93C2855C8F82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
