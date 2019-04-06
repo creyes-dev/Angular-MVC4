@@ -29,24 +29,24 @@ namespace JwtAuth.Web.API.JwtAuth
         public const string BearerScheme = "Bearer";
 
         /// <summary>
-        /// Asignar u obtener el token para verificar que la firma del JWT entrante sea válida
+        /// TODO: Asignar u obtener el token para verificar que la firma del JWT entrante sea válida
         /// </summary>
         public SecurityToken SigningToken { get; set; }
         
         /// <summary>
-        /// Audience permitida (usualmente un URL)
+        /// La Audience permitida (usualmente un URL) en el JWT entrante que se asigna en esta clase
         /// </summary>
         public string AllowedAudience { get; set; }
 
         /// <summary>
-        /// Listado de valores de Audience que serán permitidos (usualmente URL)
-        /// en la validación de los Audiences de los JWT entrantes
+        /// Listado de valores de Audience que serán permitidos como válidos en los JWT entrantes,
+        /// se asigna en esta clase
         /// </summary>
         public IEnumerable<string> AllowedAudiences { get; set; }
 
         /// <summary>
-        /// Referencia del emisor del token (usualmente un URL) que será permitido en la validación
-        /// de los JWT entrantes
+        /// Referencia del emisor del token (usualmente un URL) que será permitido como válido en los JWT entrantes,
+        /// se asigna en esta clase
         /// </summary>
         public string Issuer { get; set; }
 
@@ -58,6 +58,7 @@ namespace JwtAuth.Web.API.JwtAuth
 
         public JwtAuthenticationMessageHandler()
         {
+            // Asignar los valores válidos que debe contar el JWT que llega
             AllowedAudience = "http://www.dominio.gov.ar/expedientes";
             Issuer = "http://www.dominio.gov.ar/expedientes-api";
         }
@@ -69,30 +70,16 @@ namespace JwtAuth.Web.API.JwtAuth
             return base.SendAsync(request, cancellationToken);
         }
 
-        protected virtual string ObtenerTokenDelHeader(HttpRequestMessage request)
-        {
-            var authHeader = request.Headers.Authorization;
-            if (authHeader == null) return null;
-
-            if (authHeader.Scheme != BearerScheme)
-            {
-                _logger.DebugFormat(
-                    "El esquema del Authorization Header es {0}; es requerido que {1} sea manejado como JWT.",
-                    authHeader.Scheme,
-                    BearerScheme);
-            }
-            else
-            {
-                return authHeader.Parameter;
-            }
-
-            return null;
-        }
-
         /// <summary>
         /// SendAsync es disparado cuando este objeto recibe un HttpRequestMessage o un objeto HttpResponseMessage.
-        /// La funcionalidad que presenta el siguiente bloque de código posee la finalidad de validar un JWT y
-        /// obtener el objeto <see cref="IPrincipal" /> correspondiente a los datos presentes en el payload.
+        /// El siguiente bloque de código valida un JWT y obtiene el objeto <see cref="IPrincipal" /> correspondiente 
+        /// a los datos presentes en el payload siguiendo los siguientes pasos:
+        /// 1. Obtener el token string del del Authorization header
+        /// 2. Validar que el token haya sido encotnrado en el Authentication header
+        /// 3. Obtener el objeto JWT desde el string del token
+        /// 4. Validar el algoritmo con el que se ha firmado el token
+        /// 5. Obtener el objeto Principal como resultado de la validación del token
+        /// 6. Asociar el objeto Principal al contexto actual
         /// </summary>
         /// <param name="request">Mensaje de solicitud HTTP que el objeto actual está encargado de manejar</param>
         /// <param name="cancellationToken"></param>
@@ -145,7 +132,7 @@ namespace JwtAuth.Web.API.JwtAuth
 
             // 5. Obtener el objeto Principal como resultado de la validación del token
 
-            // TODO: No se
+            // Parámetros utilizados para validar el token 
             var parameters = new TokenValidationParameters
             {
                 ValidAudience = AllowedAudience,
@@ -158,20 +145,33 @@ namespace JwtAuth.Web.API.JwtAuth
             {
                 // Validar el token y obtener el objeto Principal
                 var tokenHandler = CrearTokenHandler();
+
+                // Se obtiene el TokenHandler concreto que será utilizado para validar el token
                 IPrincipal principal = tokenHandler.ValidateToken(token, parameters);
 
                 if (PrincipalTransformer != null)
                 {
+                    // Obtener el objeto IPrincipal almacenado en el token
                     principal = PrincipalTransformer.Transform((ClaimsPrincipal)principal);
-                    CheckPrincipal(principal, PrincipalTransformer.GetType());  // TODO: Autenticar??
+
+                    // Verificar la validez del objeto IPrincipal obtenido
+                    CheckPrincipal(principal, PrincipalTransformer.GetType()); 
                 }
 
-                // Asociar el objeto principal obtenido al contexto actual
+                // Si el flujo de ejecución llega a este punto es porque el token que se obtuvo es válido
+                // y el objeto Principal que contiene los datos incluidos en el token es válido, 
+                // a continuación corresponde asociar el objeto IPrincipal al contexto actual
+
+                // 6. Asociar el objeto Principal al contexto actual
+
+
+                // Asociar el objeto IPrincipal a Thread.CurrentPrincipal
                 Thread.CurrentPrincipal = principal;
                 _logger.DebugFormat("El objeto principal asociado al hilo es '{0}'", principal.Identity.Name);
 
                 if (HttpContext.Current != null)
                 {
+                    // Asociar el objeto IPrincipal a HttpContext.Current.User
                     HttpContext.Current.User = principal;
                 }
             }
@@ -248,7 +248,61 @@ namespace JwtAuth.Web.API.JwtAuth
 
             return BaseSendAsync(request, cancellationToken);
         }
+        
+        /// <summary>
+        /// Método responsable de obtener el token del authorization header del mensaje http entrante
+        /// que deberá ser llamado por el método responsable de manejar el mensaje http
+        /// </summary>
+        /// <param name="request">Mensaje http entrante</param>
+        /// <returns>Token que transporta el mensaje almacenado en un string</returns>
+        protected virtual string ObtenerTokenDelHeader(HttpRequestMessage request)
+        {
+            var authHeader = request.Headers.Authorization;
+            if (authHeader == null) return null;
 
+            if (authHeader.Scheme != BearerScheme)
+            {
+                _logger.DebugFormat(
+                    "El esquema del Authorization Header es {0}; es requerido que {1} sea manejado como JWT.",
+                    authHeader.Scheme,
+                    BearerScheme);
+            }
+            else
+            {
+                return authHeader.Parameter;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Método responsable de crear un objeto <see cref="IJwtSecurityToken" /> a partir de un token
+        /// almacenado en un string, deberá ser llamado por el método responsable de manejar el mensaje http
+        /// </summary>
+        /// <param name="token">token almacenado en un string</param>
+        /// <returns>Objeto que posee en su estado los datos almacenados del token</returns>
+        protected virtual IJwtSecurityToken CrearToken(string token)
+        {
+            return new JwtSecurityTokenAdapter(token);
+        }
+
+        /// <summary>
+        /// Método responsable de crear y devolver un objeto <see cref="IJwtSecurityTokenHandlerAdapter" />
+        /// que podrá ser utilizado por el método responsable de manejar el mensaje http para validar el JWT 
+        /// que se encuentra en el mensaje http
+        /// </summary>
+        /// <returns></returns>
+        protected virtual IJwtSecurityTokenHandlerAdapter CrearTokenHandler()
+        {
+            return new JwtSecurityTokenHandlerAdapter();
+        }
+
+        /// <summary>
+        /// Método que inicia una excepción si el objeto IPrincipal obtenido del token es nulo o si 
+        /// su propiedad Identity es nula, deberá ser llamado por el método responsable de manejar el mensaje http
+        /// </summary>
+        /// <param name="principal"></param>
+        /// <param name="transformerType"></param>
         protected virtual void CheckPrincipal(IPrincipal principal, Type transformerType)
         {
             if (principal == null)
@@ -263,16 +317,6 @@ namespace JwtAuth.Web.API.JwtAuth
                                     transformerType.FullName + ") must include a non-null Identity.");
             }
         }
-
-        protected virtual IJwtSecurityToken CrearToken(string token)
-        {
-            return new JwtSecurityTokenAdapter(token);
-        }
-
-        protected virtual IJwtSecurityTokenHandlerAdapter CrearTokenHandler()
-        {
-            return new JwtSecurityTokenHandlerAdapter();
-        }
-
+        
     }
 }
