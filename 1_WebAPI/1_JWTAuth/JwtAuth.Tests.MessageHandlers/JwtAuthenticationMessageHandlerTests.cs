@@ -20,6 +20,7 @@ namespace JwtAuth.Tests.MessageHandlers
     [TestFixture]
     public class JwtAuthenticationMessageHandlerTests
     {
+
         private TextMessageWriter _textMessageWriter;
         private Mock<IJwtSecurityToken> _securityTokenMock;
         private Mock<IJwtSecurityTokenHandlerAdapter> _securityTokenHandlerAdapterMock;
@@ -71,7 +72,7 @@ namespace JwtAuth.Tests.MessageHandlers
             }
 
 
-            protected override Task<HttpResponseMessage> BaseSendAsync(HttpRequestMessage request, 
+            protected override Task<HttpResponseMessage> BaseSendAsync(HttpRequestMessage request,
                 CancellationToken cancellationToken)
             {
                 return Task.FromResult(new HttpResponseMessage());
