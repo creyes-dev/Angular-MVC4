@@ -4,7 +4,7 @@ using System.Security.Claims;
 namespace JwtAuth.Web.API.JwtAuth
 {
     /// <summary>
-    ///     JWT security token handler.
+    ///     JWT security token handler que utiliza la librería System.IdentityModel.Tokens para validar los datos del token
     /// </summary>
     public class JwtSecurityTokenHandlerAdapter : IJwtSecurityTokenHandlerAdapter
     {

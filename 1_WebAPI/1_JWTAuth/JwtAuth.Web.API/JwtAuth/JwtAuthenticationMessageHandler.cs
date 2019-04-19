@@ -34,19 +34,17 @@ namespace JwtAuth.Web.API.JwtAuth
         public SecurityToken SigningToken { get; set; }
         
         /// <summary>
-        /// La Audience permitida (usualmente un URL) en el JWT entrante que se asigna en esta clase
+        /// La Audience permitida (usualmente un URL) en el JWT entrante
         /// </summary>
         public string AllowedAudience { get; set; }
 
         /// <summary>
-        /// Listado de valores de Audience que serán permitidos como válidos en los JWT entrantes,
-        /// se asigna en esta clase
+        /// Listado de valores de Audience que serán permitidos como válidos en los JWT entrantes
         /// </summary>
         public IEnumerable<string> AllowedAudiences { get; set; }
 
         /// <summary>
-        /// Referencia del emisor del token (usualmente un URL) que será permitido como válido en los JWT entrantes,
-        /// se asigna en esta clase
+        /// Referencia del emisor del token (usualmente un URL) que será permitido como válido en los JWT entrantes
         /// </summary>
         public string Issuer { get; set; }
 
@@ -58,7 +56,8 @@ namespace JwtAuth.Web.API.JwtAuth
 
         public JwtAuthenticationMessageHandler()
         {
-            // Asignar los valores válidos que debe contar el JWT que llega
+            // En el constructor asignar los valores por defecto: 
+            // Audience permitidas y la identificación del Issuer
             AllowedAudience = "http://www.dominio.gov.ar/expedientes";
             Issuer = "http://www.dominio.gov.ar/expedientes-api";
         }
@@ -74,9 +73,9 @@ namespace JwtAuth.Web.API.JwtAuth
         /// SendAsync es disparado cuando este objeto recibe un HttpRequestMessage o un objeto HttpResponseMessage.
         /// El siguiente bloque de código valida un JWT y obtiene el objeto <see cref="IPrincipal" /> correspondiente 
         /// a los datos presentes en el payload siguiendo los siguientes pasos:
-        /// 1. Obtener el token string del del Authorization header
-        /// 2. Validar que el token haya sido encotnrado en el Authentication header
-        /// 3. Obtener el objeto JWT desde el string del token
+        /// 1. Obtener el token string almacenado en el Authorization header
+        /// 2. Validar que el token haya sido encontrado en el Authentication header
+        /// 3. Obtener el objeto JWT utilizando el string del token
         /// 4. Validar el algoritmo con el que se ha firmado el token
         /// 5. Obtener el objeto Principal como resultado de la validación del token
         /// 6. Asociar el objeto Principal al contexto actual
@@ -88,10 +87,10 @@ namespace JwtAuth.Web.API.JwtAuth
             HttpRequestMessage request,
             CancellationToken cancellationToken)
         {
-            // 1. Obtener el token string del del Authorization header
+            // 1. Obtener el token string desde el Authorization header
             var tokenStringFromHeader = ObtenerTokenDelHeader(request);
 
-            // 2. Validar que el token haya sido encotnrado en el Authentication header
+            // 2. Validar que el token haya sido encontrado en el Authentication header
             var tokenString = tokenStringFromHeader;
             
             if (string.IsNullOrEmpty(tokenString))
@@ -163,7 +162,6 @@ namespace JwtAuth.Web.API.JwtAuth
                 // a continuación corresponde asociar el objeto IPrincipal al contexto actual
 
                 // 6. Asociar el objeto Principal al contexto actual
-
 
                 // Asociar el objeto IPrincipal a Thread.CurrentPrincipal
                 Thread.CurrentPrincipal = principal;

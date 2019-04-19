@@ -116,13 +116,15 @@ namespace JwtAuth.Tests.MessageHandlers
 
             var principal = new ClaimsPrincipal(new ClaimsIdentity());
 
-            // Definir el comportamiento del método ValidateToken del Mock ignorando el segundo parametro
+            // Definir el comportamiento del método ValidateToken del Mock 
+            // enviando por parametros el mock del token e ignorando los parámetros de validación
             _securityTokenHandlerAdapterMock.Setup(
                 x => x.ValidateToken(_securityTokenMock.Object, It.IsAny<System.IdentityModel.Tokens.TokenValidationParameters>()))
                 .Returns(principal);
 
             await _authenticationMessageHandler.SendAsync(requestMessage, CancellationToken.None);
 
+            // Verificar que se haya asociado correctamente en los contextos actuales el objeto principal que instanciamos 
             Assert.AreSame(principal, Thread.CurrentPrincipal, "CurrentPrincipal Incorrecto");
             Assert.AreSame(principal, HttpContext.Current.User, "Usuario incorrecto en HttpContext");
         }
@@ -136,12 +138,14 @@ namespace JwtAuth.Tests.MessageHandlers
             var principal = new ClaimsPrincipal(new ClaimsIdentity());
             var principalTransformado = new GenericPrincipal(new ClaimsIdentity(), new[] { "user" });
 
-            /*
+            // Definir el comportamiento del método ValidateToken del Mock 
+            // enviando por parametros el mock del token e ignorando los parámetros de validación
             _securityTokenHandlerAdapterMock.Setup(
-                x => x.ValidateToken(_securityTokenMock.Object, It.IsAny<SecurityTokenValidationException>()))
+                x => x.ValidateToken(_securityTokenMock.Object, It.IsAny<TokenValidationParameters>()))
                 .Returns(principal);
+
+            // Mock para que siempre se transforme cualquier objeto IPrincipal al objeto principal personalizado que instanciamos
             _principalTransformerMock.Setup(x => x.Transform(principal)).Returns(principalTransformado);
-            */
 
             _authenticationMessageHandler.PrincipalTransformer = _principalTransformerMock.Object;
 
