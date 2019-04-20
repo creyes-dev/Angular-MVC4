@@ -17,6 +17,10 @@ using JwtAuth.Web.API.JwtAuth;
 
 namespace JwtAuth.Tests.MessageHandlers
 {
+    /// <summary>
+    /// Clase en la que se efectúa pruebas que involucran la asociación de un objeto <see cref="ClaimsPrincipal" /> y un objeto <see cref="GenericPrincipal" />
+    /// a los contextos Thread.CurrentPrincipal y HttpContext.Current.User
+    /// </summary>
     [TestFixture]
     public class JwtAuthenticationMessageHandlerTests
     {
@@ -71,7 +75,6 @@ namespace JwtAuth.Tests.MessageHandlers
                 return "Esto es un token";
             }
 
-
             protected override Task<HttpResponseMessage> BaseSendAsync(HttpRequestMessage request,
                 CancellationToken cancellationToken)
             {
@@ -106,8 +109,12 @@ namespace JwtAuth.Tests.MessageHandlers
             _textMessageWriter.Dispose();
         }
 
-        // 
-
+        /// <summary>
+        /// Probar que en la ejecución del JwtAuthenticationMessageHandler
+        /// un objeto <see cref="ClaimsPrincipal" /> sea transformado a un objeto <see cref="IPrincipal" /> personalizado 
+        /// y se asocie correctamente a Thread.CurrentPrincipal y HttpContext.Current.User
+        /// </summary>
+        /// <returns></returns>
         [Test]
         public async Task SendAsyncAsignacionPrincipal()
         {
@@ -122,6 +129,11 @@ namespace JwtAuth.Tests.MessageHandlers
                 x => x.ValidateToken(_securityTokenMock.Object, It.IsAny<System.IdentityModel.Tokens.TokenValidationParameters>()))
                 .Returns(principal);
 
+            // Se ejecuta el MessageHandler sin asociar el objeto IPrincipalTransformer
+            // entonces no se transformará el objeto ClaimsPrincipal al objeto IPrincipal, 
+            // y en esta prueba se comprobara que el objeto que se termina asociando a a 
+            // Thread.CurrentPrincipal y a HttpContext.Current.User no es un objeto IPrincipal personalizado
+            // sino el objeto ClaimsPrincipal instanciado para efectuar esta prueba
             await _authenticationMessageHandler.SendAsync(requestMessage, CancellationToken.None);
 
             // Verificar que se haya asociado correctamente en los contextos actuales el objeto principal que instanciamos 
@@ -129,6 +141,11 @@ namespace JwtAuth.Tests.MessageHandlers
             Assert.AreSame(principal, HttpContext.Current.User, "Usuario incorrecto en HttpContext");
         }
 
+        /// <summary>
+        /// Probar que en la ejecución del JwtAuthenticationMessageHandler
+        /// un objeto <see cref="GenericPrincipal" /> se asocie correctamente a Thread.CurrentPrincipal y HttpContext.Current.User
+        /// </summary>
+        /// <returns></returns>
         [Test]
         public async Task SendAsyncPrincipalTransformado()
         {
@@ -144,17 +161,24 @@ namespace JwtAuth.Tests.MessageHandlers
                 x => x.ValidateToken(_securityTokenMock.Object, It.IsAny<TokenValidationParameters>()))
                 .Returns(principal);
 
-            // Mock para que siempre se transforme cualquier objeto IPrincipal al objeto principal personalizado que instanciamos
+            // Mock para que siempre se transforme cualquier objeto IPrincipal en el objeto principal personalizado que instanciamos
             _principalTransformerMock.Setup(x => x.Transform(principal)).Returns(principalTransformado);
 
+            // Se asocia el Mock del IPrincipalTransformer para se obtenga siempre el objeto GenericPrincipal instanciado 
             _authenticationMessageHandler.PrincipalTransformer = _principalTransformerMock.Object;
 
+            // Se ejecuta el MessageHandler obteniendo como objeto IPrincipal el GenericPrincipal instanciado
             await _authenticationMessageHandler.SendAsync(requestMessage, CancellationToken.None);
 
             Assert.AreSame(principalTransformado, Thread.CurrentPrincipal, "CurrentPrincipal Incorrecto");
             Assert.AreSame(principalTransformado, HttpContext.Current.User, "Usuario incorrecto en HttpContext");
         }
 
+        /// <summary>
+        /// Probar que el método utilizado por el MessageHandler para verificar si posee un 
+        /// objeto IPrincipal asociado inicie una excepción si no se pudo transformar un token
+        /// a un objeto IPrincipal
+        /// </summary>
         [Test]
         public void CheckPrincipalOPrincipalNull()
         {
@@ -178,6 +202,10 @@ namespace JwtAuth.Tests.MessageHandlers
             }
         }
 
+        /// <summary>
+        /// Probar que el método utilizado por el MessageHandler para verificar si posee un 
+        /// objeto IPrincipal asociado inicie una exepción si falta el objeto Identity asociado al IPrincipal
+        /// </summary>
         [Test]
         public void CheckPrincipalPrincipalIdentityNull()
         {
